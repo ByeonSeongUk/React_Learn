@@ -1,0 +1,7 @@
+### react ###
+.DS_*
+**/*.backup.*
+**/*.back.*
+
+# Dependency directories
+*/node_modules/
