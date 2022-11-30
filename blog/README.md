@@ -1,1 +1,1 @@
-# React 기초
+# React 기초 학습
