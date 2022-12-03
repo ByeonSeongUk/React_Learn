@@ -184,7 +184,7 @@ const Modal2 = () => { // let, var, const 사용 가능
     </div>
   );
 }
-*/
+
 
 // 컴포넌트를 만드는 방법 3 - CLASS 문법
 class Modal3 extends React.Component {
@@ -196,7 +196,7 @@ class Modal3 extends React.Component {
       content : '상세내용'
     }
   }
-
+  
   render() {
     return (
       <div className="modal">
@@ -208,4 +208,5 @@ class Modal3 extends React.Component {
     )
   }
 }
+*/
 export default App;
