@@ -109,7 +109,8 @@ function App() {
                     setTitleNum(i);
                   }}
               >{ title[i] }
-                <span onClick={()=>{
+                <span onClick={(e)=>{
+                  e.stopPropagation(); // 이벤트 버블링 현상 방지 -- 이벤트 버블링이란? 상위 html로 이벤트가 퍼져서 상위 이벤트 전체 실행 되는 현상
                   let copy = [...likey]
                   copy[i]++
                   likeyCount(copy);
