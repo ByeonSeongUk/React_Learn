@@ -43,3 +43,11 @@
   background-size: cover;
   bacckgroud-position: center;
 }
+/* transition */
+.start {
+  transform: scale(0);
+}
+.end {
+  transform: scale(1);
+  transition: all 0.5s;
+}

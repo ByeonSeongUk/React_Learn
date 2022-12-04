@@ -3,13 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 import {Button, Navbar, Container, Nav} from "react-bootstrap";
 import data from './data.js';
-import { useState } from "react";
+import { createContext, useState } from "react";
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
-import Detail from './routes/Detail.js'
+import Detail from './routes/Detail.js';
+import axios from 'axios';
+
+// Context API 사용 예제
+export let Context1 = createContext(); // state를 위한 보관함
+
 function App() {
 
-    let [shoes] = useState(data);
+    let [shoes, setShoes] = useState(data);
     let navigate = useNavigate();
+
+    let [getData, setData] = useState('');
+
+    // Context API 사용 예제
+    let [stock, setStock] = useState([10, 11, 12]);
 
     return (
         <div className="App">
@@ -39,7 +49,6 @@ function App() {
                         {/* 상품 컴포넌트 */}
                         <div className={"container"}>
                             <div className={"row"}>
-
                                 {
                                     shoes.map((a, i)=>{
                                         return(
@@ -49,11 +58,41 @@ function App() {
                                 }
                             </div>
                         </div>
+                        {/* axios */}
+                        <button onClick={()=>{
+                            axios.get('https://codingapple1.github.io/shop/data2.json')
+                                .then((result)=>{
+                                    console.log(result.data);
+                                    let copy = [...shoes, ...result.data];
+                                    setShoes(copy);
+                                })
+                                .catch(()=>{
+                                    console.log('요청실패시 예외처리');
+                                })
+
+                            // // 여러 요청을 모내는 방법 (둘 다 성공했을시 출력)
+                            // Promise.all([ axios.get('/url1'), axios.get('/url2')])
+                            //     .then(()=>{
+                            //
+                            //     });
+
+                            // // json data
+                            // "{"name": "Object"}" // json data는 이런식으로 주곱 ㅏㄷ음
+
+
+                            axios.post('', {name: 'kim'})
+                        }}>더보기</button>
+
                     </>
                 }/>
 
                 {/* URL Parameter 문법 */}
-                <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
+                <Route path="/detail/:id" element={
+                    // Context API 예제
+                    <Context1.Provider value={{ stock }}>
+                        <Detail shoes={shoes}/>
+                    </Context1.Provider>
+                }/>
 
                 {/* Nested Router : 태그안에 태그가 들어간 형태 */}
                 <Route path="/about" element={<About/>}>
