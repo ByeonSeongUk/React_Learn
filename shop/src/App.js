@@ -3,10 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import {Button, Navbar, Container, Nav} from "react-bootstrap";
 import data from './data.js';
+import axios from 'axios';
 import { createContext, useState } from "react";
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
 import Detail from './routes/Detail.js';
-import axios from 'axios';
+import Cart from './routes/Cart.js';
 
 // Context API 사용 예제
 export let Context1 = createContext(); // state를 위한 보관함
@@ -94,6 +95,8 @@ function App() {
                     </Context1.Provider>
                 }/>
 
+                <Route path={"/cart"} element={ <Cart/> }></Route>
+
                 {/* Nested Router : 태그안에 태그가 들어간 형태 */}
                 <Route path="/about" element={<About/>}>
                     <Route path="member" element={<div>멤버소개</div>}/>   {/* /about/memeber */}
@@ -111,7 +114,7 @@ function About() {
         <>
             <h4>회사정보</h4>
             {/* Nested Router를 보여줄 자리가 <Outlet> */}
-            <Outlet></Outlet>
+            <Outlet></Outlet>바
         </>
     );
 }
