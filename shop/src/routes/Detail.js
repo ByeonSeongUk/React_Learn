@@ -7,6 +7,10 @@ import {Nav, Tab} from "react-bootstrap";
 // context API 예제
 import {Context1} from './../App.js'
 
+// redux
+import {useDispatch} from "react-redux";
+import {addItem} from "../store";
+
 // styled 라이브러리 기본 사용법
 let Box = styled.div`
   padding : 20px;
@@ -45,6 +49,8 @@ function Detail(props) {
     // 해당 컴포넌트가 나타날때 효과
     let [fade2, setFade2] = useState('');
 
+    // redux 함수
+    let dispatch = useDispatch();
 
     // --- useEffect
     // mount, update시 코드 실행해주는 useEffect
@@ -115,7 +121,10 @@ function Detail(props) {
                     <h4 className="pt-5">{getProduct.title}</h4>
                     <p>{getProduct.content}</p>
                     <p>{getProduct.price}</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={()=>{
+                        console.log('click');
+                        dispatch(addItem({id:2, name:'Grey Yordan', count: 1}))
+                    }}>주문하기</button>
                     <p>{contextTest}</p>
                 </div>
             </div>

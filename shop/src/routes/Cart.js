@@ -1,7 +1,7 @@
 import {Button, Table} from 'react-bootstrap'
 import {useDispatch, useSelector} from "react-redux";
 import {increase, changeName} from "../store/userSlice";
-import {setCount} from "../store";
+import {addCount} from "../store";
 function Cart() {
 
     // Redux store 를 가져와준다.
@@ -13,11 +13,19 @@ function Cart() {
     return (
         <>
             <h6>{state.user.name}{state.user.age}의 장바구니</h6>
+
             <Button onClick={()=>{
-                dispatch(increase(100))
-            }}
-            >CHG</Button>
+                    dispatch(increase(100))
+                }}
+                >+</Button>
+
+            <Button onClick={()=>{
+                dispatch(changeName())
+            }}>Cng</Button>
+
            <Table>
+
+
                 <thead>
                     <tr>
                         <th>#</th>
@@ -27,16 +35,6 @@ function Cart() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>{cart[0].id}</th>
-                        <th>{cart[0].name}</th>
-                        <th>{cart[0].count}</th>
-                        <th>
-                            <Button onClick={()=>{
-                                dispatch(changeName())
-                            }}>+</Button>
-                        </th>
-                    </tr>
 
                     {
                         cart.map((a, i) =>
@@ -46,7 +44,7 @@ function Cart() {
                                 <th>{cart[i].count}</th>
                                 <th>
                                     <Button onClick={()=>{
-                                        dispatch(setCount(i))
+                                        dispatch(addCount(cart[i].id))
                                     }}>+</Button>
                                 </th>
                             </tr>

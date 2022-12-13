@@ -11,16 +11,26 @@ let cart = createSlice({
     name: 'cart',
     initialState:   [
         {id : 0, name : 'White and Black', count : 2},
-        {id : 2, name : 'Grey Yordan', count : 1}
+        {id : 1, name : 'Grey Yordan', count : 1}
     ],
     reducers: {
-        setCount(state, i) {
-            return state.cart[i].count++;
+        // 상품 수량 추가
+        addCount(state, action) {
+            // 배열로 찾기
+            // state[action.payload].count++;
+            let i = state.findIndex((a) => {return a.id === action.payload});
+            state[i].count++;
         }
+        ,
+        // 상품 장바구니에 추가
+        addItem(state, action) {
+            state.push(action.payload);
+        }
+
     }
 })
 
-export let { setCount } = cart.actions
+export let { addCount, addItem } = cart.actions
 
 export default configureStore({
     reducer: {
